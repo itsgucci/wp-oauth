@@ -1,0 +1,264 @@
+/* this is for tour button */
+.mo-otp-help-button.fixed#restart_tour_button{
+	/* right:5.6em; */
+    position: absolute;
+    left: calc(100% - 255px);
+}
+
+.mo-card {
+    top: 50%;
+    left: 50%;
+    width: 24em;
+    margin-left: -12em;
+    /*set to a negative number 1/2 of your width*/
+    /* border: 1px solid #ccc; */
+    background-color: #ffffff00;
+    position: fixed;
+    z-index : 999991;
+    border-radius: 4px;
+    line-height: 16px;
+    font-weight: 600;
+    /* transform: scale(0.8); */
+}
+
+.mo-tour-card-bottom {
+height: 3px;
+width: 100%;
+background-color: #48a0dc;
+bottom: 0px;
+}
+
+.mo-card h2 {     font-size: 15px; margin:0;}
+.mo-card h3 {     font-size: 13px;margin:0;}
+
+#mo-card {
+    opacity: 0.1;
+    transform: scale(0.9);
+    transition: 0.1s all ease-out;
+
+}
+
+
+
+
+/* when no side, centre */
+.mo-tour-content-area{
+    height: 115%;
+    width: 100%;
+    position: absolute;
+    /* border: 1px solid #b8acee; */
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    border-radius: 4px;
+
+}
+
+.mo-tour-arrow{
+    /* border: 1px solid #bcda18; */
+    text-align: center;
+    height: 0;
+    font-size: 5em;
+}
+
+.mo-tour-arrow>i {
+    position: relative;
+    top: calc(50% - 0.6em);
+    font-size: 40px;
+}
+
+
+/* when pointing left */
+.mo-point-left.mo-tour-arrow{
+    height: 100%;
+    width: 5%;
+    position: relative;
+    left : 0;
+    float: left;
+
+}
+
+.mo-point-left.mo-tour-content-area {
+    width: 95%;
+    left : 5%;
+    float: left;
+}
+
+/* when pointing right */
+.mo-point-right.mo-tour-arrow{
+    height: 100%;
+    width: 5%;
+    left : 95%;
+    position: relative;
+    float: left;
+    margin-left: -2px;
+}
+.mo-point-right.mo-tour-content-area {
+    width: 95%;
+    float: left;
+
+}
+
+/* when pointing top */
+.mo-point-up.mo-tour-arrow{
+    height: 8%;
+    margin-bottom: -5px;
+}
+
+.mo-point-up.mo-tour-content-area {
+    height: 92%;
+}
+
+
+/* when pointing bottom */
+.mo-point-down.mo-tour-arrow{
+    height: 7%;
+    top: 94%;
+    position: relative;
+    margin-top: -5px;
+
+}
+
+.mo-point-down.mo-tour-content-area {
+    height: 92%;
+    top: 0;
+}
+
+.mo-tour-content-area>img {
+    padding-top: 10px;
+    width:auto;/*maintain aspect ratio*/
+}
+.mo-tour-title>h1 , .mo-tour-content{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.mo-tour-title>span>h1 {
+    font-weight: 700;
+    font-size: 1.2em;
+    margin:5px;
+}
+
+.mo-tour-button-area{
+    position: absolute;
+    bottom: 0;
+    margin: 25px auto;
+    text-align: center;
+    width: 100%;
+    border-radius: 7px;
+}
+
+.mo-medium .mo-tour-button-area{
+    margin: 10px auto;
+}
+.mo-small .mo-tour-button-area{
+    margin: 10px auto;
+}
+.mo-small h1, .mo-small .mo-tour-content {
+    padding: 5px 15px 0 15px;
+}
+
+.mo-medium h1, .mo-medium .mo-tour-content {
+    padding: 5px 15px 0 15px;
+}
+
+.mo-tour-button {
+    line-height: 1.4;
+    font-weight: 600;
+    margin:auto 15px;
+    height: 35px;
+    width: 110px;
+    padding: 0 20px;
+    border: none;
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition: background-color 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.mo-point-left.mo-tour-button {
+    margin:auto 10px;
+}
+
+.mo-skip-btn:hover {
+    background-color: #f61717d9;
+    color: #ffffff;
+    /* box-shadow: 0px 4px 10px 0px #32373c; */
+}
+
+.mo-skip-btn {
+    background-color: #ffffff00;
+    border-bottom: 3px solid #f61717d9;
+    color: #f61717d9;
+}
+
+.mo-tour-primary-btn {
+    background-color: #ffffff00;
+    border: 2px solid #48a0dc;
+    color : #48a0dc;
+
+}
+
+.mo-tour-primary-btn:hover {
+    color : #ffffff;
+    background-color:  #48a0dc;
+    /* border: 2px solid #48a0dc; */
+}
+
+.mo-target-index {
+    z-index: 999992 !important;
+    position: relative !important;
+    background-color: #ffffff;
+}
+
+.mo-big {
+    height: 20em;
+    margin-top: -10em;
+    /*set to a negative number 1/2 of your height*/
+}
+
+.mo-medium {
+    height: 14em;
+    margin-top: -7em;
+    /*set to a negative number 1/2 of your height*/
+}
+
+.mo-small {
+    height: 10em;
+    margin-top: -5em;
+    /*set to a negative number 1/2 of your height*/
+}
+
+.mo-big img {
+    height:80px;
+}
+
+.mo-medium img {
+    height:50px;
+    padding-top:10px;
+}
+
+.mo-small img {
+    height:40px;
+}
+
+i.dashicons.dashicons-arrow-up {
+    left: -10px;
+    margin-top: 2px;
+}
+
+i.dashicons.dashicons-arrow-down {
+    left: -9px;
+}
+
+i.dashicons.dashicons-arrow-left {
+    left: -9px;
+}
+
+i.dashicons.dashicons-arrow-right {
+    left: -15px;
+}
+
+.mo-tour-advsets > ul {
+    text-align: left;
+    list-style: disclosure-closed;
+    padding: 0 1.5em;
+}

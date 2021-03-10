@@ -1,0 +1,92 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+ 
+ #mo_oauth_client_default_apps_input {
+  background-image: url('/css/searchicon.png');
+  background-position: 6px 8px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 15px;
+  padding: 8px 12px 8px 20px;
+  border: 1px solid #ddd;
+  margin-bottom: 8px;
+}
+#mo_oauth_client_default_apps {list-style-type: none;padding: 0;margin: 0;}
+#mo_oauth_client_default_apps li a {
+  text-decoration: none;
+  font-size: 12px;
+  line-height:14px;
+  color: black;
+  display: block;
+  min-height: 80px;
+}
+.mo_oauth_client_default_app_icon {max-height:50px;max-width:50px}
+.mo_oauth_client_default_app_icon:hover { background-color: #eee;}
+#mo_oauth_client_default_apps li {
+	border: 1px solid #ddd;
+	background-color: #f6f6f6;
+	padding: 8px 2px;
+	display:inline-block; width:120px;height:80px;text-align:center;vertical-align:middle;
+	margin:2px;
+}
+
+input.disabled, input:disabled, select.disabled, select:disabled, textarea.disabled, textarea:disabled {background:#eee !important}
+
+.mo_premium_features_notice {
+  background: #f2f2f2;
+  padding: 1%;
+  border-radius: 2%;
+  line-height: 1;
+}
+
+.mop_table {
+  width: 78%;
+}
+
+
+.mo-oauth-tooltip {
+  position: relative;
+  /* border-radius: 100%; */
+  display: inline-block;
+  color: #212121;
+  padding: 0 5px;
+  font-size: 15px;
+  /* background-color: #212121bf; */
+}
+
+.mo-oauth-tooltip .mo-oauth-tooltip-text {
+  visibility: hidden;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 10px;
+  position: absolute;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s;
+  width: max-content;
+}
+
+.mo-oauth-tooltip .mo-oauth-tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #555 transparent transparent;
+}
+
+.mo-oauth-tooltip:hover .mo-oauth-tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.mo-tt-right {
+  top: -5px;
+  left: 125%;
+}

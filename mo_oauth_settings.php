@@ -1,13 +1,12 @@
 <?php
 /**
- * Plugin Name: OAuth Single Sign On - SSO (OAuth Client)
- * Plugin URI: miniorange-login-with-eve-online-google-facebook
- * Description: This WordPress Single Sign-On plugin allows login into WordPress with your Azure AD B2C, AWS Cognito, Centrify, Salesforce, Discord, WordPress or other custom OAuth 2.0 / OpenID Connect providers. WordPress OAuth Client plugin works with any Identity provider that conforms to the OAuth 2.0 and OpenID Connect (OIDC) 1.0 standard.
+ * Plugin Name: OAuth Single Sign On - NeonCRM
+ * Description: This WordPress Single Sign-On plugin allows login into WordPress with NeonCRM
  * Version: 6.19.5
- * Author: miniOrange
- * Author URI: https://www.miniorange.com
- * License: MIT/Expat
-* License URI: https://docs.miniorange.com/mit-license
+ * Author: Natural Farming Hawaii
+ * Author URI: https://www.naturalfarminghawaii.net
+ * License: MIT
+* License URI: https://mit-license.org/
 */
 
 require('handler/oauth_handler.php');
@@ -68,18 +67,18 @@ class mo_oauth {
 		*   Name         dispname        Interval (in sec)
 		*   hourly       Once Hourly	 3600 (1 hour)
 		*   twicedaily   Twice Daily	 43200 (12 hours)
-		*   daily        Once Daily	     86400 (1 day) 
-		*   weekly       Once Weekly	 604800 (1 week) 
+		*   daily        Once Daily	     86400 (1 day)
+		*   weekly       Once Weekly	 604800 (1 week)
 	*/
 
 	public function mo_oauth_set_cron_job()
 	{
-		
+
 		//add_filter( 'cron_schedules', array($this,'add_cron_interval'));// uncomment this for custom intervals
-		
+
 		if (!wp_next_scheduled('check_if_wp_rest_apis_are_open')) {
-			
-			//$custom_interval=apply_filters('cron_schedules',array('three_minutes'));//uncomment this for custom interval		
+
+			//$custom_interval=apply_filters('cron_schedules',array('three_minutes'));//uncomment this for custom interval
       		wp_schedule_event( time()+604800, 'weekly', 'check_if_wp_rest_apis_are_open' );// update timestamp and name according to interval
  		}
 
@@ -102,8 +101,8 @@ class mo_oauth {
 	}
 
 
-		function add_cron_interval( $schedules ) { 
-		
+		function add_cron_interval( $schedules ) {
+
 		if(isset($schedules['three_minutes']))
 		{
     		$schedules['three_minutes'] = array(
@@ -130,11 +129,11 @@ class mo_oauth {
         	'interval' => 5 * 24 * 60 * MINUTE_IN_SECONDS,
         	'display'  => esc_html__( 'Every Five days' ), );
 		}
-		
+
     return $schedules;
 }
 
-	function mo_oauth_scheduled_task() {    
+	function mo_oauth_scheduled_task() {
     	//error_log("seems to get here on ".date('m/d/Y H:i:s', time()));
     	$url=site_url()."/wp-json/wp/v2/posts";
     	$response = wp_remote_get($url, array(
@@ -147,7 +146,7 @@ class mo_oauth {
 			'cookies' => array(),
 			'sslverify' => false,
 		));
-    	
+
     	//error_log(print_r($response,TRUE));
     	if(is_wp_error( $response ))
     	{
@@ -160,16 +159,16 @@ class mo_oauth {
     	if(isset($code) && $code=='200')
     	{
     		//error_log($response['body']);
-    		
+
     		if(isset($response))
     		{
-    			update_option( 'mo_oauth_client_show_rest_api_message', true);	
-    			//error_log("option set mo_oauth_client_show_rest_api_message=".get_option("mo_oauth_client_show_rest_api_message"));			
+    			update_option( 'mo_oauth_client_show_rest_api_message', true);
+    			//error_log("option set mo_oauth_client_show_rest_api_message=".get_option("mo_oauth_client_show_rest_api_message"));
     		}
-    		
-    	}		
-    	
-    	
+
+    	}
+
+
   }
 
 
@@ -201,7 +200,7 @@ class mo_oauth {
 			return;
 		}
 		if ( isset( $_POST['option'] ) and sanitize_text_field( wp_unslash( $_POST['option'] ) ) == "mo_oauth_client_rest_api_message" && isset( $_REQUEST['mo_oauth_client_rest_api_form_field'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['mo_oauth_client_rest_api_form_field'] ) ), 'mo_oauth_client_rest_api_form' )) {
-			
+
 			delete_option('mo_oauth_client_show_rest_api_message');
 			wp_clear_scheduled_hook( 'check_if_wp_rest_apis_are_open' );
 			return;
@@ -355,7 +354,7 @@ class mo_oauth {
 					$this->mo_oauth_show_error_message();
 				}
 			}
-		} 
+		}
 		else if( isset( $_POST['option'] ) and sanitize_text_field( wp_unslash( $_POST['option'] ) ) == "mo_oauth_add_app" && isset( $_REQUEST['mo_oauth_add_app_form_field'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['mo_oauth_add_app_form_field'] ) ), 'mo_oauth_add_app_form' )) {
 			if( current_user_can( 'administrator' ) ) {
 				$scope = '';
@@ -455,12 +454,12 @@ class mo_oauth {
 
                         if((filter_var($discovery_endpoint, FILTER_VALIDATE_URL))){
                             update_option('mo_oc_valid_discovery_ep', true);
-                            $arrContextOptions=array( 
+                            $arrContextOptions=array(
                         		"ssl"=>array(
                         			"verify_peer"=>false,
                         			"verify_peer_name"=>false,
                         		),
-                        	);  
+                        	);
                         	$content=@file_get_contents($discovery_endpoint,false, stream_context_create($arrContextOptions));
                             $provider_se = array();
                             if($content)
@@ -545,7 +544,7 @@ class mo_oauth {
 				}
 			}
 		}
-		
+
 		elseif( isset( $_POST['option'] ) and sanitize_text_field( wp_unslash( $_POST['option'] ) ) == "mo_oauth_contact_us_query_option" && isset( $_REQUEST['mo_oauth_support_form_field'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['mo_oauth_support_form_field'] ) ), 'mo_oauth_support_form' )) {
 
 			if( current_user_can( 'administrator' ) ) {
@@ -574,8 +573,8 @@ class mo_oauth {
 						$this->mo_oauth_show_success_message();
 					}
 				}
-			}	
-		} 
+			}
+		}
 		elseif( isset( $_POST['option'] ) and sanitize_text_field( wp_unslash( $_POST['option'] ) ) == "mo_oauth_setup_call_option" && isset( $_REQUEST['mo_oauth_setup_call_form_field'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['mo_oauth_setup_call_form_field'] ) ), 'mo_oauth_setup_call_form' )) {
 
 			if( current_user_can( 'administrator' ) ) {
@@ -607,7 +606,7 @@ class mo_oauth {
 					}
 					$call_time_zone = 'UTC '.$sign.' '.$hrs.':'.$mins;
 					$call_date = date("jS F",strtotime($call_date));
-					
+
 					//code to convert local time to IST
 					$local_hrs = explode(':', $call_time)[0];
 					$local_mins = explode(':', $call_time)[1];
@@ -627,15 +626,15 @@ class mo_oauth {
 
 					$ist_mins = fmod($ist_time,60);
 					$ist_mins = sprintf("%02d", $ist_mins);
-					
+
 					$ist_time = $ist_hrs.':'.$ist_mins;
 
 					$customer->submit_setup_call( $email, $issue, $desc, $call_date, $call_time_zone, $call_time, $ist_date, $ist_time);
 					update_option('message', 'Thanks for getting in touch! We shall get back to you shortly.');
 					$this->mo_oauth_show_success_message();
 				}
-			}	
-		} 
+			}
+		}
 		elseif( isset( $_POST['option'] ) and sanitize_text_field( wp_unslash( $_POST['option'] ) ) == "mo_oauth_client_demo_request_form" && isset($_REQUEST['mo_oauth_client_demo_request_field']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['mo_oauth_client_demo_request_field'])), 'mo_oauth_client_demo_request_form') ) {
 
 			if( current_user_can( 'administrator' ) ) {
@@ -656,7 +655,7 @@ class mo_oauth {
 
 					if ( $demosite_status && "Not Sure" !==  $demo_plan ) {
 						$url = 'http://demo.miniorange.com/wordpress-oauth/';
-	
+
 						$headers = array( 'Content-Type' => 'application/x-www-form-urlencoded', 'charset' => 'UTF - 8');
 						$args = array(
 							'method' =>'POST',
@@ -672,11 +671,11 @@ class mo_oauth {
 							'httpversion' => '1.0',
 							'blocking' => true,
 							'headers' => $headers,
-	
+
 						);
-	
+
 						$response = wp_remote_post( $url, $args );
-	
+
 						if ( is_wp_error( $response ) ) {
 							$error_message = $response->get_error_message();
 							echo "Something went wrong: $error_message";
@@ -684,7 +683,7 @@ class mo_oauth {
 						}
 						$output = wp_remote_retrieve_body($response);
 						$output = json_decode($output);
-	
+
 						if(is_null($output)){
 							$customer = new Mo_OAuth_Client_Customer();
 							$customer->mo_oauth_send_demo_alert( $email, $demo_plan, $query, "WP OAuth Client On Demo Request - ".$email );
@@ -800,7 +799,7 @@ class mo_oauth {
 			$this->mo_oauth_show_success_message();
 		}
 		else if ( isset( $_POST['mo_oauth_client_feedback'] ) and sanitize_text_field( wp_unslash( $_POST['mo_oauth_client_feedback'] ) ) == 'true' && isset( $_REQUEST['mo_oauth_feedback_form_field'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['mo_oauth_feedback_form_field'] ) ), 'mo_oauth_feedback_form')) {
-			
+
 			if( current_user_can( 'administrator' ) ) {
 				$user = wp_get_current_user();
 
@@ -808,10 +807,10 @@ class mo_oauth {
 				if(isset($_POST['deactivate_reason_select'])){
 					$deactivate_reason = $_POST['deactivate_reason_select'];
 				}
-				
+
 				$deactivate_reason_message = array_key_exists( 'query_feedback', $_POST ) ? sanitize_text_field( wp_unslash( $_POST['query_feedback'] ) ) : false;
 
-				
+
 
 				if ( $deactivate_reason ) {
 					$message .= $deactivate_reason;

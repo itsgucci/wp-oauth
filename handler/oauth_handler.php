@@ -86,7 +86,7 @@ class Mo_OAuth_Hanlder {
 		}else if(!$send_headers && $send_body){
 				unset( $headers['Authorization'] );
 		}
-		
+
 		$response   = wp_remote_post( $tokenendpoint, array(
 			'method'      => 'POST',
 			'timeout'     => 45,
@@ -109,7 +109,7 @@ class Mo_OAuth_Hanlder {
 			MO_Oauth_Debug::mo_oauth_log('Invalid response received.');
 			exit("Invalid response received.");
 		}
-		
+
 		$content = json_decode($response,true);
 		if(isset($content["error_description"])){
 			MO_Oauth_Debug::mo_oauth_log($content["error_description"]);
@@ -118,10 +118,10 @@ class Mo_OAuth_Hanlder {
 			MO_Oauth_Debug::mo_oauth_log($content["error"]);
 			exit($content["error"]);
 		}
-		
+
 		return $response;
 	}
-	
+
 	function getIdToken($tokenendpoint, $grant_type, $clientid, $clientsecret, $code, $redirect_url, $send_headers, $send_body){
 		$response = $this->getToken ($tokenendpoint, $grant_type, $clientid, $clientsecret, $code, $redirect_url, $send_headers, $send_body);
 		$content = json_decode($response,true);
@@ -147,10 +147,15 @@ class Mo_OAuth_Hanlder {
 		echo 'Invalid response received.<br><b>Id_token : </b>'.$id_token;
 		exit;
 	}
-	
+
 	function getResourceOwner($resourceownerdetailsurl, $access_token){
 		$headers = array();
 		$headers['Authorization'] = 'Bearer '.$access_token;
+
+
+		//modification for neoncrm
+		$resourceownerdetailsurl .= $access_token;
+
 
 		$response   = wp_remote_post( $resourceownerdetailsurl, array(
 			'method'      => 'GET',
@@ -158,7 +163,7 @@ class Mo_OAuth_Hanlder {
 			'redirection' => 5,
 			'httpversion' => '1.0',
 			'blocking'    => true,
-			'headers'     => $headers,
+			//'headers'     => $headers,
 			'cookies'     => array(),
 			'sslverify'   => false
 		) );
@@ -178,7 +183,7 @@ class Mo_OAuth_Hanlder {
 			exit("Invalid response received.");
 			}
 		}
-		
+
 		$content = json_decode($response,true);
 		if(isset($content["error_description"])){
 			MO_Oauth_Debug::mo_oauth_log($content["error_description"]);
@@ -190,7 +195,7 @@ class Mo_OAuth_Hanlder {
 
 		return $content;
 	}
-	
+
 	function getResponse($url){
 		$response = wp_remote_get($url, array(
 			'method' => 'GET',
@@ -211,10 +216,10 @@ class Mo_OAuth_Hanlder {
 			MO_Oauth_Debug::mo_oauth_log($content["error"]);
 			exit($content["error"]);
 		}
-		
+
 		return $content;
 	}
-	
+
 }
 
 ?>
